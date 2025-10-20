@@ -1,6 +1,6 @@
-const puppeteer = require('puppeteer-extra');
-const StealthPlugin = require('puppeteer-extra-plugin-stealth');
-puppeteer.use(StealthPlugin());
+const chromium = require('chrome-aws-lambda');
+const puppeteer = require('puppeteer-core');
+
 
 const express = require('express');
 const path = require('path');
@@ -16,17 +16,12 @@ app.get('/', (req, res) => {
 
 async function getTikTokData(username) {
   const browser = await puppeteer.launch({
-  headless: true,
-  args: [
-    '--no-sandbox',
-    '--disable-setuid-sandbox',
-    '--disable-dev-shm-usage',
-    '--disable-gpu',
-    '--no-zygote',
-    '--single-process'
-  ],
-  executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined
+  args: chromium.args,
+  defaultViewport: chromium.defaultViewport,
+  executablePath: await chromium.executablePath,
+  headless: chromium.headless,
 });
+
 
   try {
     const page = await browser.newPage();

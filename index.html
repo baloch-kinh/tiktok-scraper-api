@@ -104,13 +104,10 @@ async function fetchTikTokData() {
   resultDiv.innerHTML = "Loading...";
   try {
     const response = await fetch(`/api/tiktok/${username}`);
-    if (!response.ok) throw new Error("User not found or server error.");
+    
     const data = await response.json();
 
-    if (!data.profile || !data.profile.username) {
-      throw new Error("No user data found.");
-    }
-
+    
     resultDiv.innerHTML = `
       <div class="profile-card">
         <img src="${data.profile.avatar || ''}" alt="Profile Picture" />
