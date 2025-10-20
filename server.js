@@ -107,7 +107,7 @@ async function getTikTokData(username) {
         return {
           user: {
             username: getTextContent('[data-e2e="user-title"]'),
-            nickname: getTextContent('h2[data-e2e="user-title"]'),
+            nickname: getTextContent('h2[data-e2e="user-subtitle"]'),
             avatar: avatar,
             bio: getTextContent('[data-e2e="user-bio"]'),
             verified: !!document.querySelector('[data-e2e="user-verified"]')
