@@ -1,5 +1,5 @@
-const chromium = require('chrome-aws-lambda');
-const puppeteer = require('puppeteer-core');
+import puppeteer from 'puppeteer';
+
 
 
 const express = require('express');
@@ -16,12 +16,9 @@ app.get('/', (req, res) => {
 
 async function getTikTokData(username) {
   const browser = await puppeteer.launch({
-  args: chromium.args,
-  defaultViewport: chromium.defaultViewport,
-  executablePath: await chromium.executablePath,
-  headless: chromium.headless,
+  headless: true,
+  args: ['--no-sandbox', '--disable-setuid-sandbox']
 });
-
 
   try {
     const page = await browser.newPage();
