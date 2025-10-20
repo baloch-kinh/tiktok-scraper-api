@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer');
+const cors = require("cors")
 require("dotenv").config();
 
 
@@ -9,6 +10,7 @@ const port = 3000;
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname)));
+app.use(cors())
 
 app.get('/', (req, res) => { 
   res.sendFile(path.join(__dirname, 'index.html')); 
